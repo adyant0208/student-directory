@@ -16,5 +16,10 @@ pipeline {
                 sh './gradlew test'
             }
         }
+        stage("Gradle Check") {
+            steps {
+                sh './gradlew check'
+            }
+        }
     }
 }
