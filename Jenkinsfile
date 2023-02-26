@@ -21,5 +21,10 @@ pipeline {
                 sh './gradlew check'
             }
         }
+        stage("Gradle Check") {
+            steps {
+                sh './gradlew buildEnvironment'
+            }
+        }
     }
 }
