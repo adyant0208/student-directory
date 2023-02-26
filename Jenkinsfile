@@ -21,7 +21,7 @@ pipeline {
                 sh './gradlew check'
             }
         }
-        stage("Gradle Check") {
+        stage("Gradle BuildEnvironment") {
             steps {
                 sh './gradlew buildEnvironment'
             }
