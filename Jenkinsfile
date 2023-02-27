@@ -41,6 +41,7 @@ pipeline {
         //         }
         //     }
         // }
+        //        -D sonar.tests=student-directory/src/test \
         stage('CODE ANALYSIS with SONARQUBE') {
           
 		  environment {
@@ -59,7 +60,6 @@ pipeline {
         -D sonar.sourceEncoding=UTF-8 \
         -D sonar.language=java \
         -D sonar.sources=student-directory/src/main \
-        -D sonar.tests=student-directory/src/test \
         -D sonar.host.url=http://ec2-54-249-68-48.ap-northeast-1.compute.amazonaws.com:9000/'''
             }
 
