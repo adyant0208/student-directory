@@ -30,9 +30,12 @@ pipeline {
             }
         }
         stage("SonarQube Analysis") {
+            environment {
+                scannerHome = tool "SonarScannerServer"
+            }
             steps {
                 scripts {
-                    withSonarQubeEnv(installationName: 'SonarQubeScanner', credentialsId: 'jenkins') {
+                    withSonarQubeEnv(installationName: 'SonarScannerServer', credentialsId: 'sonar-api') {
                     sh './gradlew sonarqube \
                   -Dsonar.projectKey=${serviceName} \
                   -Dsonar.host.url=${env.SONAR_HOST_URL} \
