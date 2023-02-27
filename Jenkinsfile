@@ -29,7 +29,7 @@ pipeline {
         stage("SonarQube Analysis") {
             steps {
                 scripts {
-                    withSonarQubeEnv(credentialsId: 'jenkins') {
+                    withSonarQubeEnv(credentialsId: 'sonar-api') {
                         sh './gradlew sonarqube'
                     }
                 }
