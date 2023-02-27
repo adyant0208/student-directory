@@ -28,8 +28,13 @@ pipeline {
         }
         stage("Static Code Analysis") {
             steps {
-                withSonarQubeEnv(credentialsId: 'jenkins') {
-                    sh './gradlew clrean package sonar:sonar'
+                withSonarQubeEnv(installationName: 'SonarQubeScanner', credentialsId: 'jenkins') {
+                    sh './gradlew sonarqube \
+                  -Dsonar.projectKey=${serviceName} \
+                  -Dsonar.host.url=${env.SONAR_HOST_URL} \
+                  -Dsonar.login=${env.SONAR_AUTH_TOKEN} \
+                  -Dsonar.projectName=${serviceName} \
+                  -Dsonar.projectVersion=${BUILD_NUMBER}'
                     }
             }
         }
