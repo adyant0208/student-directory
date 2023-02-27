@@ -48,7 +48,7 @@ pipeline {
           }
 
           steps {
-            withSonarQubeEnv('sonar-pro') {
+            withSonarQubeEnv(credentialsId: 'sonar-api') {
                sh './gradlew sonarqube \
                    -Dsonar.projectName=student-directory \
                    -Dsonar.sources=src/'
