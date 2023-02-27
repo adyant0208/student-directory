@@ -50,9 +50,9 @@ pipeline {
           steps {
             script {
                 withSonarQubeEnv(credentialsId: 'jenkins') {
-               sh './gradlew sonarqube
+               sh '''./gradlew sonarqube
                    -Dsonar.projectName=student-directory \
-                   -Dsonar.sources=src/'
+                   -Dsonar.sources=src/'''
             }
 
             timeout(time: 10, unit: 'MINUTES') {
