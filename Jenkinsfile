@@ -41,8 +41,7 @@ pipeline {
         //         }
         //     }
         // }
-// -D sonar.sources=student-directory/src/main/ \
-//         -D sonar.tests=student-directory/src/test
+
 
         stage('CODE ANALYSIS with SONARQUBE') {
           
@@ -52,7 +51,7 @@ pipeline {
 
           steps {
             script {
-                withSonarQubeEnv(credentialsId: 'jenkins') {
+                withSonarQubeEnv(credentialsId: 'SonarServer') {
                sh '''/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/SonarScannerServer/bin/sonar-scanner \
      -D sonar.projectVersion=0.0.1-SNAPSHOT \
        -D sonar.login=admin \
@@ -61,6 +60,8 @@ pipeline {
         -D sonar.projectKey=student-directory \
         -D sonar.sourceEncoding=UTF-8 \
         -D sonar.language=java \
+        -D sonar.sources=student-directory/src/main/ \
+        -D sonar.tests=student-directory/src/test \
         -D sonar.host.url=http://ec2-54-249-68-48.ap-northeast-1.compute.amazonaws.com:9000/'''
             }
 
