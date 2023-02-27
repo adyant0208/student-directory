@@ -49,7 +49,7 @@ pipeline {
 
           steps {
             script {
-                withSonarQubeEnv(credentialsId: 'sonar-api') {
+                withSonarQubeEnv(credentialsId: 'jenkins') {
                sh './gradlew sonarqube \
                    -Dsonar.projectName=student-directory \
                    -Dsonar.sources=src/'
