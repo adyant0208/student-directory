@@ -41,8 +41,8 @@ pipeline {
         //         }
         //     }
         // }
-        //        -D sonar.tests=student-directory/src/test \
         stage('CODE ANALYSIS with SONARQUBE') {
+            checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/adyant0208/student-directory.git']])
           
 		  environment {
              scannerHome = tool 'SonarScannerServer'
@@ -59,8 +59,8 @@ pipeline {
         -D sonar.projectKey=student-directory \
         -D sonar.sourceEncoding=UTF-8 \
         -D sonar.language=java \
-        -D sonar.sources=main/src/main \
-        -D sonar.tests=main/src/test \
+        -D sonar.sources=student-directory/src/main/ \
+        -D sonar.tests=student-directory/src/test/ \
         -D sonar.host.url=http://ec2-54-249-68-48.ap-northeast-1.compute.amazonaws.com:9000/'''
             }
 
