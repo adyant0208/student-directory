@@ -51,7 +51,7 @@ pipeline {
 
           steps {
             script {
-                withSonarQubeEnv(credentialsId: 'SonarServer') {
+                withSonarQubeEnv(credentialsId: 'jenkins') {
                sh '''/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/SonarScannerServer/bin/sonar-scanner \
      -D sonar.projectVersion=0.0.1-SNAPSHOT \
        -D sonar.login=admin \
