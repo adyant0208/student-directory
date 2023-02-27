@@ -26,5 +26,12 @@ pipeline {
                 sh './gradlew buildEnvironment'
             }
         }
+        stage("Static Code Analysis") {
+            steps {
+                withSonarQubeEnv(credentialsId: 'jenkins') {
+                    sh './gradlew sonarqube'
+                    }
+            }
+        }
     }
 }
