@@ -48,7 +48,8 @@ pipeline {
           }
 
           steps {
-            withSonarQubeEnv(credentialsId: 'sonar-api') {
+            script {
+                withSonarQubeEnv(credentialsId: 'sonar-api') {
                sh './gradlew sonarqube \
                    -Dsonar.projectName=student-directory \
                    -Dsonar.sources=src/'
@@ -56,6 +57,8 @@ pipeline {
 
             timeout(time: 10, unit: 'MINUTES') {
                waitForQualityGate abortPipeline: true
+            }
+            
             }
           }
         }
