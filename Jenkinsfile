@@ -28,10 +28,8 @@ pipeline {
         }
         stage("SonarQube Analysis") {
             steps {
-                scripts {
-                    withSonarQubeEnv(installationName: 'SonarScannerServer', credentialsId: 'sonar-api') {
-                        sh './gradlew sonarqube'
-                    }
+                withSonarQubeEnv(installationName: 'SonarScannerServer', credentialsId: 'sonar-api') {
+                    sh './gradlew sonarqube'
                 }
             }
         }
