@@ -29,22 +29,35 @@ pipeline {
                 sh './gradlew buildEnvironment'
             }
         }
-        stage("SonarQube Analysis") {
-            environment {
-                scannerHome = tool "SonarScannerServer"
+        // stage("SonarQube Analysis") {
+        //     environment {
+        //         scannerHome = tool "SonarScannerServer"
+        //     }
+        //     steps {
+        //         scripts {
+        //             withSonarQubeEnv(installationName: 'SonarScannerServer', credentialsId: 'sonar-api') {
+        //             sh './gradlew sonarqube'
+        //             }
+        //         }
+        //     }
+        // }
+        stage('CODE ANALYSIS with SONARQUBE') {
+          
+		  environment {
+             scannerHome = tool 'SonarScanner'
+          }
+
+          steps {
+            withSonarQubeEnv('sonar-pro') {
+               sh './gradlew sonarqube \
+                   -Dsonar.projectName=student-directory \
+                   -Dsonar.sources=src/'
             }
-            steps {
-                scripts {
-                    withSonarQubeEnv(installationName: 'SonarScannerServer', credentialsId: 'sonar-api') {
-                    sh './gradlew sonarqube \
-                  -Dsonar.projectKey=${serviceName} \
-                  -Dsonar.host.url=${env.SONAR_HOST_URL} \
-                  -Dsonar.login=${env.SONAR_AUTH_TOKEN} \
-                  -Dsonar.projectName=${serviceName} \
-                  -Dsonar.projectVersion=${BUILD_NUMBER}'
-                    }
-                }
+
+            timeout(time: 10, unit: 'MINUTES') {
+               waitForQualityGate abortPipeline: true
             }
+          }
         }
     }
 }
