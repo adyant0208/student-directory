@@ -4,15 +4,15 @@ apply plugin: 'jacoco'
 sonarqube {
 	properties {
 		property "sonar.sources", "src/main/java"
-		property "sonar.projectKey", ${project.group}:${project.name}
-		property "sonar.projectName", "${projectName}"
+//		property "sonar.projectKey", ${project.group}:${project.name}
+//		property "sonar.projectName", "${projectName}"
 		property "sonar.scm.provider", "git"
 		property "sonar.language", "java"
-		property "sonar.junit.reportsPath", "${project.buildDir}/test-result/test"
+//		property "sonar.junit.reportsPath", "${project.buildDir}/test-result/test"
 		property "sonar.java.source", "17"
 		property "sonar.sourceEncoding", "UTF-8"
-		property "sonar.projectVersion", "${project.version}"
-		property "sonar.host.url", "http://ec2-3-112-43-180.ap-northeast-1.compute.amazonaws.com:9000/"
+//		property "sonar.projectVersion", "${project.version}"
+		property "sonar.host.url", "http://ec2-52-199-250-172.ap-northeast-1.compute.amazonaws.com:9000/projects"
 		property "sonar.exclusion", []
 	}
 }
