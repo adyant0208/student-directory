@@ -54,16 +54,7 @@ pipeline {
           steps {
             script {
                 withSonarQubeEnv(credentialsId: 'jenkins') {
-               sh '''/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/SonarScannerServer/bin/sonar-scanner \
-     -D sonar.projectVersion=0.0.1-SNAPSHOT \
-       -D sonar.login=admin \
-      -D sonar.password=Welcome4$ \
-      -D sonar.projectBaseDir=/var/lib/jenkins/workspace/student-directory/ \
-        -D sonar.projectKey=student-directory \
-        -D sonar.sourceEncoding=UTF-8 \
-        -D sonar.language=java \
-        
-        -D sonar.host.url=http://ec2-54-249-68-48.ap-northeast-1.compute.amazonaws.com:9000/'''
+               sh './gradlew sonarqube'
             }
 
             timeout(time: 10, unit: 'MINUTES') {
