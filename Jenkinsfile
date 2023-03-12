@@ -45,6 +45,9 @@ pipeline {
           }
         }
         stage('Quality Gate Status') {
+        environment {
+             scannerHome = tool 'SonarScannerServer'
+          }
         steps {
 	        script {
 		        waitForQualityGate abortPipeline: false, credentialsId: 'sonar-auth-token'
