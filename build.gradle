@@ -6,7 +6,6 @@ plugins {
 	id 'org.sonarqube' version '3.3'
 	id 'java-test-fixtures'
 }
-//ext["groovy.version"] = "3.0.3"
 apply from : 'jenkins-config/gradle/sonarqube.gradle'
 
 
@@ -15,20 +14,30 @@ project.description = "Student Directory"
 
 sourceCompatibility = '17'
 
+configurations {
+  compileOnly {
+    extendsFrom annotationProcessor
+  }
+}
+
 repositories {
 	mavenCentral()
 }
 
-dependencies {
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '3.0.0'
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-rest', version: '3.0.0'
-	runtimeOnly 'com.h2database:h2:2.1.214'
-  testImplementation 'org.springframework.boot:spring-boot-starter-test:3.0.0'
-	implementation 'org.codehaus.groovy:groovy-all:2.4.12'
+dependencies {	
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+  	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+  	implementation 'org.springframework.boot:spring-boot-starter-validation'
+  	implementation 'org.springframework.boot:spring-boot-starter-web'
+  	compileOnly 'org.projectlombok:lombok'
+  	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+  	runtimeOnly 'com.h2database:h2'
+  	annotationProcessor 'org.projectlombok:lombok'
+  	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 
-//tasks.named('test') {
-//	useJUnitPlatform()
-//}
+tasks.named('test') {
+  useJUnitPlatform()
+}
 

@@ -29,22 +29,6 @@ pipeline {
                 sh './gradlew buildEnvironment'
             }
         }
-        // stage("SonarQube Analysis") {
-        //     environment {
-        //         scannerHome = tool "SonarScannerServer"
-        //     }
-        //     steps {
-        //         scripts {
-        //             withSonarQubeEnv(installationName: 'SonarScannerServer', credentialsId: 'sonar-api') {
-        //             sh './gradlew sonarqube'
-        //             }
-        //         }
-        //     }
-        // }
-        //-D sonar.sources=student-directory/src/main/ \
-        // -D sonar.tests=student-directory/src/test \
-
-
         stage('CODE ANALYSIS with SONARQUBE') {
           
 		  environment {
@@ -56,7 +40,7 @@ pipeline {
                 withSonarQubeEnv(credentialsId: 'sonar-auth-token') {
                 sh 'chmod +x gradlew'
                 sh './gradlew sonarqube'
-            }            
+                }
             }
           }
         }
