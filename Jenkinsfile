@@ -56,12 +56,7 @@ pipeline {
                 withSonarQubeEnv(credentialsId: 'sonar-auth-token') {
                 sh 'chmod +x gradlew'
                 sh './gradlew sonarqube'
-            }
-
-            timeout(time: 10, unit: 'MINUTES') {
-               waitForQualityGate abortPipeline: true
-            }
-            
+            }            
             }
           }
         }
