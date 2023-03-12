@@ -12,7 +12,8 @@ sonarqube {
 		property "sonar.java.source", "17"
 		property "sonar.sourceEncoding", "UTF-8"
 //		property "sonar.projectVersion", "${project.version}"
-		property "sonar.host.url", "http://ec2-52-199-250-172.ap-northeast-1.compute.amazonaws.com:9000/projects"
+		property "sonar.buildbreaker.skip" , "false"
+		property "sonar.host.url", "http://ec2-13-231-61-19.ap-northeast-1.compute.amazonaws.com:9000/projects"
 		property "sonar.exclusion", []
 	}
 }
