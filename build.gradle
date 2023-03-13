@@ -4,12 +4,14 @@ plugins {
 	id 'org.springframework.boot' version '3.0.2'
 	id 'io.spring.dependency-management' version '1.1.0'
 	id 'org.sonarqube' version '3.3'
+	id 'maven-publish'
 	id 'java-test-fixtures'
 }
 apply from : 'jenkins-config/gradle/sonarqube.gradle'
 
 
 project.group = "com.bma"
+project.version = '1.0.0'
 project.description = "Student Directory"
 
 sourceCompatibility = '17'
@@ -21,7 +23,14 @@ configurations {
 }
 
 repositories {
+	flatDir {
+		dirs 'libs'
+	}
 	mavenCentral()
+}
+
+bootJar {
+	archiveClassifier = "boot"
 }
 
 dependencies {	
@@ -45,3 +54,19 @@ tasks.named('test') {
   useJUnitPlatform()
 }
 
+publishing {
+	String branchName = 'main'
+	if (branchName == 'main' || branchName == 'release') {
+		publications {
+			mavenJava(MavenPublication) {
+				artifact tasks.named("bootJar").get()
+			}
+		}
+		repositories {
+			maven {
+				url 'http://ec2-43-207-173-150.ap-northeast-1.compute.amazonaws.com:8081/repository/student-directory-release/'
+			}
+		}
+		
+	}
+}
